@@ -19,5 +19,5 @@ export class Song {
     duration: Date;
 
     @Column('text')
-    lyrice: string
+    lyrics: string
 }
