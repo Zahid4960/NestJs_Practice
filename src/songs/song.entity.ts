@@ -1,5 +1,6 @@
 import { Artist } from "src/artists/artists.entity";
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { PlayList } from "src/playlists/playlist.entity";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('songs')
 export class Song {
@@ -20,9 +21,12 @@ export class Song {
     duration: Date;
 
     @Column('text')
-    lyrics: string
+    lyrics: string;
 
     @ManyToMany(() => Artist, (artist) => artist.songs)
     @JoinTable({ name: 'songs_artists' })
-    artists: Artist[]
+    artists: Artist[];
+
+    @ManyToOne(() => PlayList, (playList) => playList.songs)
+    playList: PlayList;
 }
