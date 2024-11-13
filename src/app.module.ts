@@ -10,6 +10,8 @@ import { DataSource } from 'typeorm';
 import { Song } from './songs/song.entity';
 import { Artist } from './artists/artists.entity';
 import { User } from './users/user.entity';
+import { PlayList } from './playlists/playlist.entity';
+import { PlaylistsModule } from './playlists/playlists.module';
 
 const devConfig = { port: 3000 };
 const proConfig = { port: 4000 };
@@ -23,10 +25,11 @@ const proConfig = { port: 4000 };
         port: 5432,
         username: 'postgres',
         password: '!@#DreamOnline123',
-        entities: [Song, Artist, User],
+        entities: [Song, Artist, User, PlayList],
         synchronize: true
       }),
-    SongsModule
+    SongsModule,
+    PlaylistsModule
   ],
   controllers: [AppController],
   providers: [
