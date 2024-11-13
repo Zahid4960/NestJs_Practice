@@ -5,6 +5,7 @@ import { CreateSongDTO } from './dto/create-song-dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UpdateSongDTO } from './dto/update-song-dto';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
+import { Artist } from 'src/artists/artists.entity';
 
 @Injectable({
     scope: Scope.TRANSIENT
@@ -13,17 +14,23 @@ export class SongsService {
 
     constructor(
         @InjectRepository(Song)
-        private songsRepository: Repository<Song>
+        private songsRepository: Repository<Song>,
+        @InjectRepository(Artist)
+        private artistRepository: Repository<Artist>
     ) {}
 
     async create(songDto: CreateSongDTO): Promise<Song> {
         
         const song = new Song();
         song.title = songDto.title;
-        song.artists = songDto.artists;
         song.releaseDate = songDto.releaseDate;
         song.duration = songDto.duration;
         song.lyrics = songDto.lyrics;
+
+        // find all the artists on the based on ids
+        const artists = await this.artistRepository.findByIds(songDto.artists);
+        // set the relation with artists
+        song.artists = artists;
 
         return await this.songsRepository.save(song);
     }
@@ -36,9 +43,9 @@ export class SongsService {
         return await this.songsRepository.findOneBy({ id });
     }
 
-    async update(id: number, recordToUpdate: UpdateSongDTO): Promise<UpdateResult> {
-        return this.songsRepository.update(id, recordToUpdate);
-    }
+    // async update(id: number, recordToUpdate: UpdateSongDTO): Promise<UpdateResult> {
+    //     return this.songsRepository.update(id, recordToUpdate);
+    // }
 
     async remove(id: number): Promise<DeleteResult> {
         return this.songsRepository.delete(id);

@@ -52,10 +52,10 @@ export class SongsController {
         return this.songService.findOne(id);
     }
 
-    @Patch(':id')
-    update(@Param('id', ParseIntPipe)id: number, @Body() updateSongDto: UpdateSongDTO): Promise<UpdateResult> {
-        return this.songService.update(id, updateSongDto);
-    }
+    // @Patch(':id')
+    // update(@Param('id', ParseIntPipe)id: number, @Body() updateSongDto: UpdateSongDTO): Promise<UpdateResult> {
+    //     return this.songService.update(id, updateSongDto);
+    // }
 
     @Delete(':id')
     delete(@Param('id', ParseIntPipe) id: number): Promise<DeleteResult> {

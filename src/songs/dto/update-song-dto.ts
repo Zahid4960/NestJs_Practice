@@ -1,5 +1,5 @@
 import { Optional } from "@nestjs/common";
-import { IsArray, IsDateString, IsMilitaryTime, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsArray, IsDateString, IsMilitaryTime, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class UpdateSongDTO {
     @IsString()
@@ -7,7 +7,7 @@ export class UpdateSongDTO {
     readonly title: string;
 
     @IsArray()
-    @IsString({ each: true })
+    @IsNumber({}, { each: true })
     @Optional()
     readonly artists: string[];
 
