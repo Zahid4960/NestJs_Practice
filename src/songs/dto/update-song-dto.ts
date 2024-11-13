@@ -1,21 +1,22 @@
+import { Optional } from "@nestjs/common";
 import { IsArray, IsDateString, IsMilitaryTime, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
-export class CreateSongDTO {
+export class UpdateSongDTO {
     @IsString()
-    @IsNotEmpty()
+    @Optional()
     readonly title: string;
 
-    @IsNotEmpty()
     @IsArray()
     @IsString({ each: true })
+    @Optional()
     readonly artists: string[];
 
-    @IsNotEmpty()
     @IsDateString()
+    @Optional()
     readonly releaseDate: Date;
 
     @IsMilitaryTime()
-    @IsNotEmpty()
+    @Optional()
     readonly duration: Date;
 
     @IsString()
