@@ -14,6 +14,7 @@ import { PlayList } from './playlists/playlist.entity';
 import { PlaylistsModule } from './playlists/playlists.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { ArtistsModule } from './artists/artists.module';
 
 const devConfig = { port: 3000 };
 const proConfig = { port: 4000 };
@@ -33,7 +34,8 @@ const proConfig = { port: 4000 };
     SongsModule,
     PlaylistsModule,
     AuthModule,
-    UsersModule
+    UsersModule,
+    ArtistsModule,
   ],
   controllers: [AppController],
   providers: [
